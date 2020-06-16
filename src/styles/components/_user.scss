@@ -1,0 +1,60 @@
+.video-tab {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    // background-color: black;
+    -moz-box-align: stretch;
+    align-items: stretch;
+    justify-content: stretch;
+    height: 44px;
+    margin-bottom: 2px;
+
+    
+    &__video {
+        // background-color: red;
+        flex: 1 1 0%;
+        position: relative;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: $m2-size-fn;
+        line-height: 2.5rem;
+        color: rgba(18, 18, 18, 0.5);
+        display: flex;
+        -moz-box-align: center;
+        align-items: center;
+        -moz-box-pack: center;
+        justify-content: center;
+        text-align: center;
+        height: inherit;
+        margin: 0;
+
+        &:hover .video-tab__bottom-line {
+            background: red;
+        }
+    }
+
+    &__likes {
+        @extend .video-tab__video;
+                
+        &::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0) url("//s16.tiktokcdn.com/tiktok/falcon/_next/static/images/pc_like_private-fa9fdba609f7d67819f3f0c5d0d76f02.svg") no-repeat scroll center center / contain;
+            margin-right: 6px;
+        }
+       
+
+    }
+
+    &__bottom-line {
+        position: absolute;
+        height: 2px;
+        background: rgb(22, 24, 35) none repeat scroll 0% 0%;
+        left: 0px;
+        bottom: 0px;
+        width: 50%;
+        transition: transform 0.3s ease 0s;
+    }
+}

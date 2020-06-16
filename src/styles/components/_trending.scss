@@ -1,0 +1,43 @@
+.trending-content-wrapper {
+    display: flex;
+    padding: 5rem 0;
+
+}
+
+.trending-content {
+    height: 100%;
+    flex: 1 0 auto;
+
+    //HEADER
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        
+        height: 15rem;
+    }
+
+    &__title {
+        margin: 0;
+        line-height: 1;
+        font-size: $xl-size-fn;
+    }
+    &__subtitle {
+        color: $grey-1;
+        line-height: 2.4;
+        margin: 0;
+        font-size: $m2-size-fn;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

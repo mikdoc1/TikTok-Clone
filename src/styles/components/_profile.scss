@@ -1,0 +1,159 @@
+.user-container {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.user {
+
+    &__header {
+        margin-bottom: 2rem;
+        width: 59.4rem;
+        box-sizing: border-box;
+        padding-right: 5.2rem;
+        flex: 0 0 auto;
+        position: relative;
+    }
+
+    &__info-description {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        -webkit-box-align: center;
+    }
+
+    &__avatar {
+        position: relative;
+
+        &-img {
+            position: relative;
+            display: block;
+            width: 120px;
+            height: 120px;
+        }
+    }
+
+    &__text {
+        margin-left: 2rem;
+
+        &-title {
+            padding-bottom: .4rem;
+            line-height: 3.8rem;
+        }
+
+        &-subtitle {
+            line-height: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+
+    &__follow-button {
+        font-weight: 700;
+        font-size: $m2-size-fn;
+        line-height: 25px;
+        width: 20.8rem;
+        margin: 1.6rem 0 0;
+        padding: 0;
+        height: 3.6rem;
+    }
+
+    &__info-count {
+        margin: 0;
+        margin-top: 3rem;
+        color: rgba(18,18,18,0.75);
+        strong {
+            font-weight: 700;
+            font-size: 1.7rem;
+            line-height: 2.5rem;
+        }
+        span {
+            display: inline-block;
+            font-weight: 400;
+            font-size: $m2-size-fn;
+            line-height: 2.2rem;
+            margin-left: .6rem;
+            margin-right: 2rem;
+        }
+    }
+
+    &__welcome {
+        margin-top: 1.5rem;
+        font-weight: 500;
+        font-size: $m-size-fn;
+        line-height: 2.2rem;
+        color: #121212;
+        white-space: pre-line;
+    }
+
+    // &__content {
+
+    // }
+}
+
+.more-actions {
+    position: absolute;
+    right: 12px;
+    top: 11px;
+    cursor: pointer;
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+        background: url(//s16.tiktokcdn.com/tiktok/falcon/_next/static/images/icon_more-049abde1081d63f3e48b6093b29f785b.svg) center no-repeat;
+        background-size: auto;
+        background-size: contain;
+        position: relative;
+    }
+
+    &__popup {
+        width: 18rem;
+        height: 6.5rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0 , .15);
+        position: absolute;
+        left: -13.5rem;
+        top: 4rem;
+        text-align: center;
+     
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 75%;
+            transform: translate(0, -100%);
+            display: block;
+            height: 0;
+            width: 0;
+            border: 10px solid rgba(0, 0, 0, 0);
+            border-bottom-color: rgba(0, 0, 0, 0);
+            border-bottom-style: solid;
+            border-bottom-width: 10px;
+            border-bottom: 10px solid #fff;
+            opacity: 1;
+        }
+
+        &-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            position: relative;
+            margin: 0;
+            top: 50%;
+            right: 8%;
+            transform: translateY(-50%);
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 18%;
+                background: url('/picture/flag.png') center no-repeat;
+                background-size: contain;
+                height: 2rem;
+                width: 2rem;
+            }
+
+        }
+    }
+
+}

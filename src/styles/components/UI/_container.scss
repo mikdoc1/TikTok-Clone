@@ -1,0 +1,20 @@
+.container {
+    max-width: 1220px;
+    min-width: 320px;
+    margin: 0 auto;
+    // padding: 3rem;
+}
+
+.narrow-container {
+    position: relative;
+    max-width: 1135px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.narrower-container  {
+    display: flex;
+    margin: 0 auto;
+    padding: 36px 20px;
+    width: 1040px;
+}

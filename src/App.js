@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/styles.scss';
+import { Switch, Route } from 'react-router-dom';
+import Layout from './container/Layout';
+import Main from './components/Main';
+import Trending from './components/Trending/Trending';
+import Discover from './components/Discover/Discover';
+import User from './components/User/User';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Layout>
+        <Switch>
+          <Route path='/profile/:id'  component={User}/>
+          <Route path='/discover' component={Discover}/>
+          <Route path='/trending' component={Trending}/>
+          <Route path='/' exact component={Main}/>
+        </Switch>
+      </Layout>
   );
 }
+
+
 
 export default App;
