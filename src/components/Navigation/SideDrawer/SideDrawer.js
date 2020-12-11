@@ -1,22 +1,24 @@
 import React from 'react';
-import Logo from '../../Logo/Logo';
+import BigLogo from '../../Logo/BigLogo';
 import Navigation from '../Navigation';
 import BackDrop from '../../UI/BackDrop';
 import { CSSTransition } from 'react-transition-group';
 
+
 const SideDrawer = (props) => {
     return (
         <>
-            <BackDrop isOpen={props.isOpen} />
+            <BackDrop isOpen={props.isOpen} /> 
             <CSSTransition   
                 in={props.isOpen}
-                timeout={600}
-                classNames="sidedrawer"
+                timeout={600} 
+                classNames="sidedrawer" 
                 unmountOnExit>                   
-                    <div className="sidedrawer">   
-                        <div className="toggler-wrapper"></div>            
-                        <Logo big/>           
-                        <Navigation sideDrawerToggle={props.sideDrawerToggle} />        
+                    <div className="sidedrawer"> 
+                        <div className="big-logo-container">
+                            <BigLogo  closeSidebar={props.closeSidebar}/>    
+                        </div>          
+                        <Navigation  closeSidebar={props.closeSidebar}/>        
                     </div>
             </CSSTransition>
         </>

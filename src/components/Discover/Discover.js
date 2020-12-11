@@ -31,22 +31,22 @@ const Discover = () => {
     return (
         <React.Fragment>
             <div className="narrow-container">
-                <div className="discover-content-wrapper">
-                    <div className="trending-content__header">
-                        <div className="trending-content__text">
-                            <h1 className="trending-content__title">Discover</h1>
-                            <h2 className="trending-content__subtitle">Be the first to watch the latest videos</h2>
+                <div className="discover">
+                    <div className="discover__header">
+                        <div className="heading">
+                            <h1 className="heading__title">Discover</h1>
+                            <h2 className="heading__subtitle">Be the first to watch the latest videos</h2>
                         </div>
                         <div className="share-group">
-                            <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/facebook-e57973bad0d38696e66f7e406061c2d7.svg"
-                                            link="https://www.facebook.com/login"
-                                            alt="fb"/>
-                            <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/pinterest-111d7b07a418e41e4e3c3b9271eb739b.svg"
-                                            link="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den&media=https%3A%2F%2Fp16.muscdn.com%2Fobj%2Fmusically-maliva-obj%2F65299d601fce6efe7a1dd7535de1503e&desc=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den"
-                                            alt="pin"/>
-                            <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/twitter-f974686c9caf32edc64461df46aa2383.svg"
-                                            link="https://twitter.com/intent/tweet?refer_source=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den&text=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den"
-                                            alt="fb"/>
+                                <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/facebook-e57973bad0d38696e66f7e406061c2d7.svg"
+                                                link="https://www.facebook.com/login"
+                                                alt="fb"/>
+                                <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/pinterest-111d7b07a418e41e4e3c3b9271eb739b.svg"
+                                                link="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den&media=https%3A%2F%2Fp16.muscdn.com%2Fobj%2Fmusically-maliva-obj%2F65299d601fce6efe7a1dd7535de1503e&desc=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den"
+                                                alt="pin"/>
+                                <ShareGroup     src="https://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/twitter-f974686c9caf32edc64461df46aa2383.svg"
+                                                link="https://twitter.com/intent/tweet?refer_source=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den&text=https%3A%2F%2Fwww.tiktok.com%2Ftrending%3Flang%3Den"
+                                                alt="fb"/>
                         </div>
                     </div>
                     <div className="carousel">

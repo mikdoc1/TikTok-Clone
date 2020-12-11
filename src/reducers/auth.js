@@ -1,4 +1,4 @@
-import { firebase } from '../firebase/firebase';
+
 
 const initState = {
     askUserBirthday: false,
@@ -26,8 +26,9 @@ const authReducer = (state = initState, action) =>  {
                 userInfo: {
                     age: action.age,
                     uid: action.uid,
-                    nickName: null,
-                    email: action.email
+                    email: action.email,
+                    phoneNumber: action.phoneNumber,
+                    nickName: action.nickName
                 }
             }
         case('SET_NICK_NAME'): 
@@ -52,7 +53,8 @@ const authReducer = (state = initState, action) =>  {
                     age: null,
                     nickName: null,
                     uid: null,
-                    email: null
+                    email: null,
+                    phoneNumber: null
                 }
             }
         case('LOGOUT'):
@@ -63,7 +65,8 @@ const authReducer = (state = initState, action) =>  {
                     age: null,
                     nickName: null,
                     uid: null,
-                    email: null
+                    email: null,
+                    phoneNumber: null
                 }
             };
         case('LOGIN'):
@@ -71,7 +74,19 @@ const authReducer = (state = initState, action) =>  {
                 askUserBirthday: false,
                 askUserNickName: false,
                 userInfo: {
-                    ...state.userInfo
+                    age: action.age,
+                    nickName: action.nickName,
+                    uid: action.uid,
+                    email: action.email,
+                    phoneNumber: action.phoneNumber
+                }
+            }
+        case('SET_RANDOM_USERNAME'):
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    nickName: action.username
                 }
             }
         default:

@@ -1,14 +1,17 @@
 import React, {useEffect} from 'react';
 import ModalPortal from '../Modal/ModalPortal';
-import Form  from '../LoginForm/Form';
+import Form  from '../Authentication/Form';
 import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal';
-import { deleteAccount } from '../../actions/auth';
+import { deleteAccount, setRandomUsername } from '../../actions/auth';
 
 
 const Modal = (props) => {
     const closeButtonHandler = () => {
         props.onHideModal();
+        if(props.username === '') {
+            props.onSetRandomUsername();
+        }
         if(props.askUserBirthday && !props.age) {
             console.log('delete')
             props.onDeleteAccount();
@@ -42,14 +45,16 @@ const mapStateToProps = state => {
     return {
         isModalOpen: state.modal.isModalOpen,
         askUserBirthday: state.auth.askUserBirthday,
-        age: state.auth.userInfo.age
+        age: state.auth.userInfo.age,
+        username: state.auth.userInfo.nickName,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onHideModal: () => dispatch(closeModal()),
-        onDeleteAccount: () => dispatch(deleteAccount())
+        onDeleteAccount: () => dispatch(deleteAccount()),
+        onSetRandomUsername: () => dispatch(setRandomUsername())
     }
 }
 

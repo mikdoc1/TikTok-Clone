@@ -1,0 +1,87 @@
+
+.title-large {
+    font-size: $l2-size-fn;
+    font-weight: 800;
+    color: #000;
+    margin: 0;
+}
+
+.title-largest {
+    font-size: $xxl-size-fn;
+    margin: 0;
+    line-height: 1;
+}
+
+.title-small {
+    margin: 0;
+    font-weight: 500;
+    font-size: $l-size-fn;
+}
+.title-small_bold {
+    margin: 0;
+    font-weight: 700;
+    font-size: $m3-size-fn;
+}
+
+.title-small_white {
+    @extend .title-small;
+    color: white;
+}
+
+.title-medium {
+    font-size: $s-size-fn;
+    color: $grey-1;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+        text-underline-position: under
+    }
+}
+
+.title {
+    font-size: $m-size-fn;
+    color: rgba(0, 0, 0, .7);
+    margin: 0;
+    text-decoration: none;
+}
+
+.title_red_bold {
+    font-size: $m-size-fn;
+    font-weight: 600;
+    color: rgb(254, 44, 85);
+    text-decoration: none;
+}
+
+.title_black_bold {
+    color: #000;
+    font-weight: 700;
+}
+.title_black {
+    color: #000;
+}
+
+.title-medium-big {
+    font-size: $m2-size-fn;
+    text-decoration: none;
+    font-weight: 600;
+    color: black;
+}
+.title-medium-big_bold {
+    font-weight: 800;
+}
+
+.title-smallest {
+    font-size: $s-size-fn;
+    color: $grey;
+}
+
+.title-smallest_white {
+    margin: 0;
+    font-size: $s-size-fn;
+    color: white;
+}
+
+
+
+
+

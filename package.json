@@ -19,6 +19,7 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "sass-resources-loader": "^2.0.3",
     "styled-components": "^5.1.0",
     "twilio": "^3.45.0",
     "uuid": "^8.1.0",

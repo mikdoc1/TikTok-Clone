@@ -5,9 +5,6 @@ import {v4 as uuidv4} from 'uuid';
 import ExploreColHeader from './ExploreColHeader';
 
 
-
-
-
 const ExploreCol  = () => {
     const [vidUrl, setVidUrl] = useState('');
     const [videoWithAudio, setVideoWithAudio] = useState([]);
@@ -39,10 +36,6 @@ const ExploreCol  = () => {
         setVidUrl(url)   
     };
 
-    // const mouseEnter = (e) => {
-    //    e.target.play()
-    // }
-
 
     return (
         <React.Fragment>
@@ -51,11 +44,14 @@ const ExploreCol  = () => {
                     return (
                     <div className="explore__col-item" key={title}>                       
                         <div className="explore__col-header">
-                            <ExploreColHeader   logo={logo}
-                                                smallText={smallText} 
-                                                title={title} subtitle={subtitle} 
-                                                audioUrl={audioUrl} 
-                                                index={index}/> 
+                            <ExploreColHeader   musicData={{
+                                                    logo,
+                                                    smallText,
+                                                    title,
+                                                    subtitle,
+                                                    audioUrl
+                                                }}/> 
+                                                
                                         
                     
                         </div>  
@@ -77,7 +73,7 @@ const ExploreCol  = () => {
                     )
                 })}
             </div>
-            <div className="explore__col" style={{marginLeft: '5.4rem'}}>
+            <div className="explore__col">
                 {video.map(({ videosInfo, logo, smallText, title, subtitle}) => {
                     return (
                     <div className="explore__col-item" key={subtitle}>

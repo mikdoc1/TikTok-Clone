@@ -1,0 +1,59 @@
+.logo-container {
+    position: relative;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.logo {
+    position: relative;
+    top: 4px;
+    display: block;
+    width: 100%;
+    height: 42px;
+    cursor: pointer;
+}
+
+.logo-img {
+    width: 28px;
+}
+
+.logo-text {
+    width: 97px;
+    margin-left: 4px;
+    position: relative;
+    top: -2px;
+}
+
+.big-logo-container {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 44px;
+}
+
+.big-logo {
+    position: relative;
+    top: 4px; 
+    display: block;
+    width: 100%;
+    height: 42px;
+    height: 52px;
+    cursor: pointer;
+}
+
+.big-logo-img {
+    width: 38px;
+}
+
+.big-logo-text {
+    width: 120px;
+    margin-left: 4px;
+    position: relative;
+    top: -2px;
+}   
+
+.white-logo-text {
+    margin-left: .6rem;
+}

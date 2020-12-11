@@ -1,5 +1,27 @@
 import { firebase, db } from '../firebase/firebase';
+import { closeModal } from '../actions/modal';
 
+export const loginWithPassword = (_, email, password) => {
+    
+    return dispatch => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch(err => {
+                firebase.auth().createUserWithEmailAndPassword(email, password);
+                dispatch(newUser());
+            })
+    }
+}
+
+export const resetPassword = (emailAddress) => {
+    return dispatch => {
+        firebase.auth().sendPasswordResetEmail(emailAddress)
+            .then(function() {
+                console.log('email sent')
+            }).catch(function(error) {
+                console.log(error)
+            });  
+    }
+}
 
 const phoneSignUp = response => ({
     type: 'LOGIN_WITH_PHONE_NUMBER',
@@ -17,13 +39,13 @@ export const signUpWithPhoneNumber = (number) => {
 
         firebase.auth().signInWithPhoneNumber(phoneNumber, recaptcha)
             .then(res => {
-                dispatch(phoneSignUp(res))
+                dispatch(phoneSignUp(res));
             })
             .catch(err => console.log(err));   
     };
 };
 
-const newUser = () => ({
+export const newUser = () => ({
     type: 'NEW_USER'
 });
 
@@ -31,7 +53,7 @@ export const loginWithSocial = (provider) => {
     return dispatch => {
         firebase.auth().signInWithPopup(provider)
             .then(res => {
-                if(res.additionalUserInfo) {
+                if(res.additionalUserInfo.isNewUser) {
                     dispatch(newUser());
                 }
             })
@@ -39,17 +61,18 @@ export const loginWithSocial = (provider) => {
     }
 }
 
-const userInfo = (uid, age, email) => ({
+const userInfo = (uid, age, email, phoneNumber, nickName) => ({
     type: 'SET_USER_INFO',
     uid,
     age,
-    email
+    email,
+    phoneNumber,
+    nickName
 });
 
 export const setUserInfo = (userBirthday) => {
     return dispatch => {
         const user = firebase.auth().currentUser;
-
         const calculateAge = () => {
             const dob = new Date(
                 +userBirthday.year,
@@ -63,28 +86,46 @@ export const setUserInfo = (userBirthday) => {
         }
 
         let age = calculateAge();
-
+        
         db.collection('users').doc(user.uid).set({
-            age   
-        })
+            personalData: {
+                age,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                bio: 'Hello World!',
+                name: user.displayName,
+                username: ''
+            },
+            profileData: {
+                followers: 0,
+                following: 0,
+                likes: 0,
+                avatar: user.photoURL,
+                hasVideos: false
+            },
+            videoData: []
+        }, {merge: true})
         .then(() => {
-            dispatch(userInfo(user.uid, age, user.email))
+            dispatch(userInfo(user.uid, age, user.email, user.phoneNumber, ''))
         })
         .catch(err => console.log('ERROR', err))
     }
 }
 
-const setNickName = (nickName) => ({
+const setNickName = (username) => ({
     type: 'SET_NICK_NAME',
-    nickName
+    username
 })
 
-export const setUserNickName = (nickName) => {
+export const setUserNickName = (username) => {
+    let user = firebase.auth().currentUser;
     return dispatch => {
-        db.collection('nick-names').doc('nick-names-list').set({
-            [nickName]: true
-        }, {merge: true})
-        .then(() => dispatch(setNickName(nickName)))
+        db.collection('users').doc(user.uid).update({
+            'personalData.username': username
+        }).then(() => {
+            dispatch(setNickName(username));
+            dispatch(closeModal());
+        })
     }
 }
 
@@ -94,9 +135,13 @@ const deleteUser = () => ({
 
 export const deleteAccount = () => {
     return dispatch => {
-        let user = firebase.auth().currentUser;
-        user.delete();
-        dispatch(deleteUser())
+        const user = firebase.auth().currentUser;
+
+        db.collection('collection').doc(user.uid).delete()
+            .then(() => {
+                user.delete();
+                dispatch(deleteUser());
+            })  
     }
 }
 
@@ -111,8 +156,65 @@ export const logout = () => {
     }
 }
 
-export const login = () => ({
-    type: 'LOGIN'
+const loginUser = (age, email, uid, nickName, phoneNumber) => ({
+    type: 'LOGIN',
+    age,
+    email,
+    uid,
+    nickName,
+    phoneNumber
+});
+
+export const login = (uid) => {
+    return async dispatch => {
+        let user = firebase.auth().currentUser;
+
+        let doc = await db.collection('users').doc(user.uid).get();
+
+        if(doc.data() && !uid) {
+            let userInfo = {...doc.data().personalData};
+            dispatch(loginUser(userInfo.age, userInfo.email, user.uid, userInfo.username, userInfo.phoneNumber));
+            dispatch(closeModal());
+        } 
+        
+    }
+}
+
+const generateUsername = () => {
+    const length = 8;
+    let timestamp = +new Date();
+    let ts = timestamp.toString();
+    let parts = ts.split( "" ).reverse();
+    let id = "";
+  
+    const getRandomInt = ( min, max ) => {
+        return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+    }
+
+    for( let i = 0; i < length; ++i ) {
+        let index = getRandomInt( 0, parts.length - 1 );
+        id += parts[index];	 
+    }
+    return 'user' + id;
+}
+
+const randomUsername = (username) => ({
+    type: 'SET_RANDOM_USERNAME',
+    username
 })
 
+export const setRandomUsername = () => {
+    return dispatch => {
+        const user = firebase.auth().currentUser;
+
+        const username = generateUsername();
+        db.collection('users').doc(user.uid).update({
+            'personalData.username': username
+        }).then(() => {
+            dispatch(randomUsername(username));
+            dispatch(closeModal());
+        })
+        
+    }
+}
 

@@ -43,16 +43,21 @@ const withAuthPhoneNumber = (WrappedComponent) => {
             setOpt(e.target.value);
         }
     
-        const onLogin = (e) => {
+        const confirmOpt = (e) => {
             e.preventDefault();
             if(opt == null) return;
-            props.response.confirm(opt);          
+            props.response.confirm(opt)
+                .then((res) => {
+                    if(res.additionalUserInfo.isNewUser) {
+                        props.onSetNewUser();
+                    }   
+                })        
         };
 
         return (
             <WrappedComponent   phoneInputHandler={phoneInputHandler}
                                 codeInputHandler={codeInputHandler}
-                                onLogin={onLogin}
+                                confirmOpt={confirmOpt}
                                 phoneNum={phoneNum}
                                 sendCodeBtnClass={btnClasses.sendCodeBtnClass}
                                 loginBtnClass={btnClasses.loginBtnClass}

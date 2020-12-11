@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ShareGroup = (props) => {
-    
     return (
         <>
             <a className="share" href={props.link}>

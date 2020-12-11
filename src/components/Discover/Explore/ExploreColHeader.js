@@ -1,74 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import CircleProgressBar from '../../CircleProgress/CircleProgressBar';
 import { Link } from 'react-router-dom';
-
-let prevAudio = null;
-let prevAudioUrl = null;
-const audio = {};
+// import withAudioPlayer from '../../../HOC/withAudioPlayer';
 
 const ExploreColHeader = (props) => {  
-    
-    const { logo, smallText, title, subtitle, audioUrl } = props;
-    const [speed, setSpeed] = useState(0);
-    const [playInfo, setPlayInfo] = useState(() => {
-        audio[audioUrl] = {
-            isPaused: true,
-            isPlaying: false
-        }
-        return audio
-    })
+    const { 
+        musicData,
+        playInfo, 
+        speed,
+        musicEnd,
+        musicPaused,
+        musicStartPlay,
+        playerHandler,
+    } = props;
+
     const audioRef = useRef(null);
-
-    const playerHandler = (e, audioUrl) => { 
-
-        const currentAudio = audioRef.current;
-
-        if(currentAudio.paused) {
-            currentAudio.play();
-        } else {
-            currentAudio.pause();
-        }
-
-        if(prevAudio !== currentAudio && prevAudio !== null){
-            prevAudio.pause();
-        } 
-
-        prevAudio = currentAudio; 
-        prevAudioUrl = audioUrl;
-        setSpeed((currentAudio.duration * 10 / 3.45));
-    };
-
-    const musicEnd = (audioUrl) => {
-        setPlayInfo(playInfo => ({
-            ...playInfo,
-            [audioUrl]: {
-                isPaused: true,
-                isPlaying: false
-            }
-        }))
-    };
-
-    const musicPaused = (e, audioUrl) => {
-        if(!e.target.ended) {
-            setPlayInfo(playInfo => ({
-                ...playInfo,
-                [audioUrl]: {
-                    isPaused: true,
-                    isPlaying: true
-                }
-            }))
-        }
-    }
-
-    const musicStartPlay = (e, audioUrl) => {
-        setPlayInfo(playInfo => ({
-            ...playInfo,
-            [audioUrl]: {
-                isPaused: false,
-                isPlaying: true
-            }
-        }));
-    }
+    const {
+        logo,
+        smallText,
+        title,
+        subtitle,
+        audioUrl,
+    } = musicData;
 
     return (
         <React.Fragment>
@@ -94,7 +47,7 @@ const ExploreColHeader = (props) => {
                                                                                   onPause={(e) => musicPaused(e, audioUrl)}/>        
 
                     <img  className="play-pause-icon"                                       
-                    onClick={(e) => playerHandler(e, audioUrl)}
+                    onClick={(e) => playerHandler(e, audioUrl, audioRef)}
                     src={!playInfo[audioUrl].isPaused  ? "http://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/ic-pause-music-f17b0043d2eddfb53fedfc63f7d6ed23.svg" 
                                                        : "http://s16.tiktokcdn.com/tiktok/falcon/_next/static/images/ic-play-music-1c8e04d5f523f9f92d9eb5882f9ab005.svg"
                     }   

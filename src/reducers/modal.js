@@ -4,7 +4,7 @@ const initialState = {
     isModalOpen: false
 }
 
-export const modalReducer = (state = initialState, action) => {
+const modalReducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.SHOW_MODAL:
             return {
@@ -18,5 +18,7 @@ export const modalReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default modalReducer;
 
 

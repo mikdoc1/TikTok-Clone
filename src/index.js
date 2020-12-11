@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { firebase } from './firebase/firebase';
+import { login } from './actions/auth';
 
 export const history = createBrowserHistory();
 
@@ -16,6 +16,9 @@ const store = configureStore();
 firebase.auth().onAuthStateChanged(user => {
   if(user) {  
     console.log('login');
+    const uid = store.getState().auth.userInfo.uid
+    // firebase.auth().signOut()
+    store.dispatch(login(uid));
   } else {
     console.log('logout');
   }

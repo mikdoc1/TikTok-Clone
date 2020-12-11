@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { setUserInfo } from '../../actions/auth';
 
 
 const SelectDayMonthYear = props => {

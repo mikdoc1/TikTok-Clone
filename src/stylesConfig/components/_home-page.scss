@@ -1,0 +1,41 @@
+.home-content {
+    width: 100%;
+}
+
+.main-videos {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    height: 100%;
+    @media only screen and (max-width: $bp-medium) {
+        height: 1696px;
+    }
+    &__video {
+        display: flex;
+        width: 20%;
+        height: 100%;
+        // flex: 1 1 288px;
+        object-fit: cover;
+        @media only screen and (max-width: $bp-medium) {
+            width: 100%;
+        }
+    }
+}
+
+
+.main-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    
+    @media only screen and (max-width: $bp-medium) {
+        position: absolute;
+        left: 50%;
+        width: 100%;
+        color: white;
+        transform: translateX(-50%);
+    }
+}
+

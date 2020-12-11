@@ -1,11 +1,9 @@
 import React, { useRef } from 'react';
-import withVideo from '../../HOC/withVideo';
-import Videos from '../VideoPlayer/Videos';
+import UserVideos from './UserVideos';
 
 
-const UserContent = props => {
+const UserContent = () => {
     const bottomLineRef = useRef(null);
-
     const tabToggler = e => {
         if(e.target.classList.contains('video-tab__video') ||  e.currentTarget.classList.contains('video-tab')) {
             bottomLineRef.current.style.transform = 'translateX(0px)'
@@ -15,6 +13,7 @@ const UserContent = props => {
     }
 
     return (
+        <>
         <div className="user__content" >
             <div className="video-tab" onMouseLeave={(e) => tabToggler(e)}>
                 <p className="video-tab__video" onMouseEnter={(e) => tabToggler(e)}>
@@ -25,12 +24,12 @@ const UserContent = props => {
                 </p>
                 <div className="video-tab__bottom-line" ref={bottomLineRef}></div>
             </div>
-            <Videos content={props.content}
-                    mouseEnterHandler={props.mouseEnterHandler}
-                    video={props.video}
-                    openVideoPlayer={props.openVideoPlayer}/>
         </div>
+        <div className="trending-body__content">
+            <UserVideos />    
+        </div>
+        </>
     )
 }
 
-export default withVideo(UserContent);
+export default UserContent;

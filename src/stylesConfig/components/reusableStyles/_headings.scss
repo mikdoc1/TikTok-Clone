@@ -1,0 +1,40 @@
+.heading {
+    display: inline-block;
+    height: 15rem;
+
+    &__title {
+        margin: 0;
+        line-height: 1;
+        font-size: $xl-size-fn;
+    }
+
+    &__subtitle {
+        color: black;
+        line-height: 2.4;
+        margin: 0;
+        font-size: $m2-size-fn;
+    }
+}
+
+@media only screen and (max-width: $bp-medium) {
+    .heading_center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 15rem;
+    
+        &__title {
+            margin: 0;
+            line-height: 1;
+            font-size: $xl-size-fn;
+        }
+    
+        &__subtitle {
+            color: $grey-1;
+            line-height: 2.4;
+            margin: 0;
+            font-size: $m2-size-fn;
+        }
+    }
+}
+

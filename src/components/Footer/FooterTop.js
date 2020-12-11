@@ -10,7 +10,7 @@ const FooterTop = () => {
                 <h2 className="title-small title-small_white">Text yourself a link to download TikTok</h2>
                 <div className="form_content">
                     <SelectCountryCode />
-                    <input className="input" placeholder="Phone number"/>
+                    <input type="text" className="input" placeholder="Phone number"/>
                     <button className="button button-wrapper button_footer button-wrapper_footer">Send</button>
                 </div>
                 <p className="form_text">By clicking the "send" button, you confirm that you agree to our <u>Terms of Use</u> and acknowledge you have read and understood our <u>Privacy Policy</u></p>

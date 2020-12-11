@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
-import Button from '../../UI/Button';
+import { connect } from 'react-redux';
+import Button from './Button';
 import Logo from '../../Logo/Logo';
 import Toggler from '../../UI/SidebarToggler';
 import { NavLink, useLocation } from 'react-router-dom';
+import SideDrawer from '../../Navigation/SideDrawer/SideDrawer';
 
 
 
@@ -11,7 +13,7 @@ const Toolbar = (props) => {
     const linkRef1 = useRef(null);
     const linkRef2 = useRef(null);
     const {pathname} = useLocation();
-
+    
     const mouseEnter = (e) => {
        if(e.target.pathname === '/trending') {
             linkRef1.current.classList.add('menu-list__link_active');
@@ -55,22 +57,44 @@ const Toolbar = (props) => {
     );
 
     menu = pathname === '/' ? null : menu;
+    let headerStyle = null;
+
 
     return (
         <>
-            <header className={props.isOpen ? "header header_fixed" : "header"}> 
-                <div className="logo-toggler-wrapper">
-                    <Toggler sideDrawerToggle={props.sideDrawerToggle} isOpen={props.isOpen}/>
-                    <Logo />
-                </div>
-                {menu}
-                <Button pathname={pathname}/>
-            </header>
-            {!props.isOpen && <div className="spacer"></div>}
+            {(!props.isUserPlayerOpen || !props.isTrendingPlayerOpen)  
+                                &&  <div className="header"> 
+                                        <header className="header__content"> 
+                                            <div className="hamburger-wrapper">
+                                                <div className="hamburger-menu-wrapper">
+                                                    <Toggler    isOpen={props.isOpen} 
+                                                                openSidebar={props.openSidebar} 
+                                                                closeSidebar={props.closeSidebar}/>
+                                                </div>
+                                                <div className="logo-container">
+                                                    <Logo   pathname={pathname} 
+                                                            closeSidebar={props.closeSidebar}/> 
+                                                </div>
+                                            </div>
+                                            {menu}
+                                            <Button pathname={pathname}/>
+                                        </header>
+                                        <SideDrawer isOpen={props.isOpen} 
+                                                    openSidebar={props.openSidebar}
+                                                    closeSidebar={props.closeSidebar}/>
+                                    </div>
+
+            }
+            <div className="spacer"></div>
         </>
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        isUserPlayerOpen: state.profile.isPlayerOpen,
+        isTrendingPlayerOpen: state.trending.isPlayerOpen,
+    }
+}
 
-
-export default Toolbar;
+export default connect(mapStateToProps)(Toolbar);
