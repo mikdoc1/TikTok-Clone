@@ -7,62 +7,62 @@ import Aside from '../Aside/Aside';
 import VideoPlayer from './VideoPlayer';
 // import debounce from '../../helper/debounce';
 
-
 const Music = ({ musicData, onFetchData, isPlayerOpen, playInfo, history }) => {
-    const music = history.location.pathname.match(/[^/]*$/)[0];
-    const [isUpdate, setUpdate] = useState(false);
-    
-    useEffect(() => {
-        onFetchData(music);
-    }, [music]);
+  const music = history.location.pathname.match(/[^/]*$/)[0];
+  const [isUpdate, setUpdate] = useState(false);
 
-    useEffect(() => {
-        console.log(musicData)
-        if(musicData.audioUrl) {
-            setUpdate(true)
-        }
-    }, [musicData])
+  useEffect(() => {
+    onFetchData(music);
+  }, [music, onFetchData]);
 
-    return ( 
-        <React.Fragment>
-            <div className="narrower-container"> 
-                <div className="user-container"> 
-                    {isUpdate   ?   <React.Fragment>
-                                        <MusicHeader    musicData={{
-                                                        title: musicData.title,
-                                                        subtitle: musicData.subtitle,
-                                                        smallText: musicData.smallText,
-                                                        avatar: musicData.logo,
-                                                        audioUrl: musicData.audioUrl
-                                                        }}
-                                                        playInfo={playInfo}/> 
-                                        <div className="trending-body__content">
-                                            <MusicContent /> 
-                                        </div>  
-                                    </React.Fragment>
-                                : null 
-                            }                                         
-                </div>
-                <div className="aside">
-                    <Aside />
-                </div>
-            </div>
-            {isPlayerOpen && <VideoPlayer />}
-        </React.Fragment>
-    )
+  useEffect(() => {
+    if (musicData.audioUrl) {
+      setUpdate(true);
+    }
+  }, [musicData]);
+
+  return (
+    <React.Fragment>
+      <div className="narrower-container">
+        <div className="user-container">
+          {isUpdate ? (
+            <React.Fragment>
+              <MusicHeader
+                musicData={{
+                  title: musicData.title,
+                  subtitle: musicData.subtitle,
+                  smallText: musicData.smallText,
+                  avatar: musicData.logo,
+                  audioUrl: musicData.audioUrl,
+                }}
+                playInfo={playInfo}
+              />
+              <div className="trending-body__content">
+                <MusicContent />
+              </div>
+            </React.Fragment>
+          ) : null}
+        </div>
+        <div className="aside">
+          <Aside />
+        </div>
+      </div>
+      {isPlayerOpen && <VideoPlayer />}
+    </React.Fragment>
+  );
 };
 
-const mapStateToProps = state => {
-    return {
-        musicData: state.music.musicData,
-        isPlayerOpen: state.music.isPlayerOpen,
-        playInfo: state.audioPlayer.playInfo
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    musicData: state.music.musicData,
+    isPlayerOpen: state.music.isPlayerOpen,
+    playInfo: state.audioPlayer.playInfo,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchData: (music) => dispatch(fetchUsersData(music)),
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchData: (music) => dispatch(fetchUsersData(music)),
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Music);
